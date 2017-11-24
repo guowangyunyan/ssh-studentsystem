@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<import resource="classpath:connection.xml"/>
+	
+	<bean id="userService" class="com.ssh.service.impl.UserServiceImpl">
+		<property name="commonService" ref="commonService"></property>
+		<property name="md5Encoder" ref="md5Encoder"></property>
+		<property name="userDao" ref="userDao"></property>
+		<property name="userConvert" ref="userConvert"></property>
+	</bean>
+	
+	<bean id="validator" class="com.ssh.validator.UserValidator"></bean>
+	
+	<bean id="userDao" class="com.ssh.dao.impl.UserDaoImpl"></bean>
+	
+	<bean id="userConvert" class="com.ssh.convert.UserConvert"></bean>
+	
+	<bean id="commonService" class="com.ssh.common.service.CommonService"></bean>
+	
+	<bean id="md5Encoder" class="org.springframework.security.authentication.encoding.Md5PasswordEncoder"></bean>
+	
+	<bean id="commonDao" class="com.ssh.common.dao.CommonDao">
+		<property name="sessionFactory" ref="mySessionFactory"></property>
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+
+</beans>
