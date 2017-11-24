@@ -58,7 +58,7 @@ public class LoginController {
 			cookie.setMaxAge(60 * 60 * 24);
 			response.addCookie(cookie);
 		}
-		return "redirect:loadStudentsByFields";
+		return "main";
 	}
 
 	@RequestMapping("/logout")
